@@ -1,18 +1,46 @@
 #include <stdio.h>
+struct Produto {
+    char nome[11];
+    int qt;
+};
 
-int main()
-{//cria um vetor do tipo int com cinco posições.
-int vint[5]={1,2,3,4,5};
-//cria um laço for que vai percorrer cada posição do vetor.
-for(int i=0; i < 5; i++){
-//cria um ponteiro p para cada posição do vetor.
-int *p=&vint[i];
-//efetua uma conta com base no conteúdo do ponteiro e armazena em res.
-int res = *p + 10;
-//saída de dados com quebra de linha.
-printf("%p\n", *p);
+void comprar(struct Produto *produto){
+printf("Quantidade que tem : %d\n", produto->qt);
+printf("Quantidade a ser comprada : \n ");
+int compraqt;
+scanf("%d", &compraqt);
 
-printf("resultado : %d ", res);
+produto->qt = produto->qt - compraqt;
+
+printf("Produto : %s \n Quantidade : %d", produto->nome,produto->qt);
+
 }
+
+void CriarProduto(struct Produto *produto ){
+    fflush(stdin);
+    printf("Digite a quantidade do produto:\n");
+    scanf("%d",&produto->qt);
+
+char termo;
+for(int i = 0; i<10; i++){
+    printf("Digite as letras do nome do produto:\n");
+    scanf(" %c",&termo);
+    if(termo=='0'){
+produto->nome[i]='\0';
+break;
+    }
+    produto->nome[i]=termo;
+} 
+printf("Nome : %s \n Quantidade : %d \n", produto->nome, produto->qt);
+}
+
+
+int main(){
+struct Produto produto1;
+
+CriarProduto(&produto1);
+comprar(&produto1);
+
+
     return 0;
 }
